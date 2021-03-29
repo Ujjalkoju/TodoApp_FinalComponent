@@ -115,7 +115,18 @@
         android:text="@string/add_button"
         android:textColor="@android:color/primary_text_dark" />
 
+    <Button
+        android:id="@+id/deleteButton"
+        style="@style/TextAppearance.AppCompat.Large"
 
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:text="Delete"
+        android:textColor="@android:color/primary_text_dark"
+        android:visibility="invisible"/>
 
 
 </LinearLayout>

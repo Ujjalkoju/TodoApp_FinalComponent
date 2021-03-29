@@ -19,6 +19,7 @@
 
     <string name="add_button">Add</string>
 
+    <string name="update_button">Update</string>
     <string name="nation">Nationality</string>
     <string name="name">Player Name</string>
     <string name="football_player_s_name">Football Player\'s Name</string>

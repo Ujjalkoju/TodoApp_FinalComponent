@@ -7,13 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.todo_finalapp.AddEditTask.AddEditTaskActivity;
 import com.example.todo_finalapp.Database.TaskEntry;
@@ -56,6 +59,26 @@ public class FragmentMain extends Fragment implements TaskAdapter.ItemClickListe
 
         DividerItemDecoration decoration = new DividerItemDecoration(getActivity().getApplicationContext(), DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(decoration);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            // Called when a user swipes left or right on a ViewHolder
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+// Here is where you'll implement swipe to delete
+
+                int position = viewHolder.getAdapterPosition();
+                List<TaskEntry> todoList = mAdapter.getTasks();
+                viewModel.deleteTask(todoList.get(position));
+                Toast toast=Toast.makeText(getActivity().getApplicationContext(),"Player Deleted",Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 80);
+                toast.show();
+            }
+        }).attachToRecyclerView(mRecyclerView);
         viewModel.getTasks().observe(getActivity(), new Observer<List<TaskEntry>>() {
             @Override
             public void onChanged(List<TaskEntry> taskEntries) {
@@ -67,7 +90,12 @@ public class FragmentMain extends Fragment implements TaskAdapter.ItemClickListe
 
     @Override
     public void onItemClickListener(int itemId) {
+        Log.d(TAG,"item clicked");
+        // Launch AddTaskActivity adding the itemId as an extra in the intent
+        Intent intent = new Intent(getActivity(), AddEditTaskActivity.class);
+        intent.putExtra(AddEditTaskActivity.EXTRA_TASK_ID, itemId);
 
+        startActivity(intent);
     }
 }
 

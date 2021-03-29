@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.speech.RecognizerIntent;
@@ -28,14 +29,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditTaskFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EditTaskFragment extends Fragment {
     // Extra for the task ID to be received after rotation
     public static final String INSTANCE_TASK_ID = "instanceTaskId";
+    public static final String EXTRA_TASK_ID = "ExtraTaskID";
     // Constants for priority
     public static final int PRIORITY_HIGH = 1;
     private final int REQ_CODE = 100;
@@ -50,6 +47,8 @@ public class EditTaskFragment extends Fragment {
     EditText AddNote;
     RadioGroup mRadioGroup;
     Button mButton;
+    Button btnDelete;
+    private int del_Clicked;
     View rootView;
     private int mTaskId = DEFAULT_TASK_ID;
     AddEditTaskViewModel viewModel;
@@ -68,9 +67,32 @@ public class EditTaskFragment extends Fragment {
         }
 
         Intent intent = getActivity().getIntent();
+        if (intent != null && intent.hasExtra(EXTRA_TASK_ID)) {
+            mButton.setText(R.string.update_button);
+            btnDelete.setVisibility(View.VISIBLE);
 
-        AddEditTaskViewModelFactory factory = new AddEditTaskViewModelFactory(getActivity().getApplication(), mTaskId);
-        viewModel = ViewModelProviders.of(this, factory).get(AddEditTaskViewModel.class);
+            if (mTaskId == DEFAULT_TASK_ID) {
+                // populate the UI
+
+                mTaskId = intent.getIntExtra(EXTRA_TASK_ID, DEFAULT_TASK_ID);
+                AddEditTaskViewModelFactory factory = new AddEditTaskViewModelFactory(getActivity().getApplication(), mTaskId);
+                viewModel = ViewModelProviders.of(this, factory).get(AddEditTaskViewModel.class);
+
+                viewModel.getTask().observe(getActivity(), new Observer<TaskEntry>() {
+                    @Override
+                    public void onChanged(TaskEntry taskEntry) {
+                        viewModel.getTask().removeObserver(this);
+                        populateUI(taskEntry);
+                    }
+                });
+
+            }
+        }else {
+
+            AddEditTaskViewModelFactory factory = new AddEditTaskViewModelFactory(getActivity().getApplication(), mTaskId);
+            viewModel = ViewModelProviders.of(this, factory).get(AddEditTaskViewModel.class);
+        }
+
 
         mEditText = rootView.findViewById(R.id.edit_player);
         ImageView speak = rootView.findViewById(R.id.edit_speak);
@@ -109,7 +131,7 @@ public class EditTaskFragment extends Fragment {
         mEditText = rootView.findViewById(R.id.edit_player);
         AddNote = rootView.findViewById(R.id.edit_nation);
         mRadioGroup = rootView.findViewById(R.id.radioGroup);
-
+        btnDelete=rootView.findViewById(R.id.deleteButton);
         mButton = rootView.findViewById(R.id.save_btn);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,9 +139,43 @@ public class EditTaskFragment extends Fragment {
                 onSaveButtonClicked();
             }
         });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDeleteButtonClicked();
+            }
+        });
+    }
+    private void onDeleteButtonClicked() {
+        String description = mEditText.getText().toString();
+        String note=AddNote.getText().toString();
+        int priority = getPriorityFromViews();
+        Date date = new Date();
+        del_Clicked=1;
+        TaskEntry todo = new TaskEntry(description,note, priority, date);
+        if(del_Clicked==1) {
+            todo.setId(mTaskId);
+            viewModel.deleteTask(todo);
+        }
+        getActivity().finish();
+        Toast toast=Toast.makeText(getActivity().getApplicationContext(),"Task Deleted",Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 80);
+        toast.show();
+    }
+    /**
+     * populateUI would be called to populate the UI when in update mode
+     *
+     * @param task the taskEntry to populate the UI
+     */
+    private void populateUI(TaskEntry task) {
+        if(task == null){
+            return;
+        }
+        mEditText.setText(task.getDescription());
+        AddNote.setText(task.getNote());
+        setPriorityInViews(task.getPriority());
 
     }
-
 
     /**
      * onSaveButtonClicked is called when the "save" button is clicked.
@@ -133,16 +189,22 @@ public class EditTaskFragment extends Fragment {
         Date date = new Date();
 
         TaskEntry todo = new TaskEntry(description, note, priority, date);
+        if(mTaskId == DEFAULT_TASK_ID) {
+            viewModel.insertTask(todo);
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Player added", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 0, 80);
+            toast.show();
 
+        }
+        else{
+            todo.setId(mTaskId);
+            viewModel.updateTask(todo);
+            Toast toast1=Toast.makeText(getActivity().getApplicationContext(),"Player updated",Toast.LENGTH_SHORT);
+            toast1.setGravity(Gravity.BOTTOM, 0, 80);
+            toast1.show();
 
-        viewModel.insertTask(todo);
-        Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Task added", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM, 0, 80);
-        toast.show();
-
-
+        }
         getActivity().finish();
-
 
     }
 
@@ -163,6 +225,23 @@ public class EditTaskFragment extends Fragment {
                 priority = PRIORITY_LOW;
         }
         return priority;
+    }
+    /**
+     * setPriority is called when we receive a task from MainActivity
+     *
+     * @param priority the priority value
+     */
+    public void setPriorityInViews(int priority) {
+        switch (priority) {
+            case PRIORITY_HIGH:
+                ((RadioGroup) rootView.findViewById(R.id.radioGroup)).check(R.id.radButton1);
+                break;
+            case PRIORITY_MEDIUM:
+                ((RadioGroup) rootView.findViewById(R.id.radioGroup)).check(R.id.radButton2);
+                break;
+            case PRIORITY_LOW:
+                ((RadioGroup) rootView.findViewById(R.id.radioGroup)).check(R.id.radButton3);
+        }
     }
 
     @Override

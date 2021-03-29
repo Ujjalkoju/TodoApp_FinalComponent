@@ -10,6 +10,7 @@ import com.example.todo_finalapp.Fragments.EditTaskFragment;
 import com.example.todo_finalapp.R;
 
 public class AddEditTaskActivity extends AppCompatActivity {
+    public static final String EXTRA_TASK_ID = "ExtraTaskID";
     Fragment mFragment;
     FragmentManager mFragmentManager;
     AddEditTaskViewModel viewModel;
