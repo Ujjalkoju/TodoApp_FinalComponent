@@ -1,58 +1,34 @@
 package com.example.todo_finalapp.tasks;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.todo_finalapp.AddEditTask.AddEditTaskActivity;
+import com.example.todo_finalapp.Fragments.FragmentMain;
 import com.example.todo_finalapp.R;
-import com.example.todo_finalapp.Database.TaskEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
 
 
-public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemClickListener {
-
-    // Constant for logging
-    private static final String TAG = MainActivity.class.getSimpleName();
-    // Member variables for the adapter and RecyclerView
-    private RecyclerView mRecyclerView;
-    private TaskAdapter mAdapter;
-
-
-
-    MainActivityViewModel viewModel;
+    Fragment mFragment;
+    FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
-
-        // Set the RecyclerView to its corresponding view
-        mRecyclerView = findViewById(R.id.recyclerViewTasks);
-
-        // Set the layout for the RecyclerView to be a linear layout, which measures and
-        // positions items within a RecyclerView into a linear list
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize the adapter and attach it to the RecyclerView
-        mAdapter = new TaskAdapter(this, this);
-        mRecyclerView.setAdapter(mAdapter);
-
-        DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
-        mRecyclerView.addItemDecoration(decoration);
+        mFragment=new FragmentMain();
+        mFragmentManager=getSupportFragmentManager();
+        mFragmentManager.beginTransaction()
+                .add(R.id.activityMain,mFragment)
+                .commit();
 
 
         /*
@@ -72,19 +48,6 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemC
             }
         });
 
-        viewModel.getTasks().observe(this, new Observer<List<TaskEntry>>() {
-            @Override
-            public void onChanged(List<TaskEntry> taskEntries) {
-                mAdapter.setTasks(taskEntries);
-            }
-        });
 
     }
-
-    @Override
-    public void onItemClickListener(int itemId) {
-    }
-
-
-
 }

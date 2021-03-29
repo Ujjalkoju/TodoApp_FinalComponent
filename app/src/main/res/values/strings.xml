@@ -23,4 +23,6 @@
     <string name="name">Player Name</string>
     <string name="football_player_s_name">Football Player\'s Name</string>
     <string name="nationality_and_age">Nationality and Age</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
