@@ -1,4 +1,4 @@
-package com.example.todo_finalapp;
+package com.example.todo_finalapp.Database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -9,8 +9,7 @@ import androidx.room.Update;
 @Dao
 public interface DaoUser {
     @Query("Select * from user where email= :mail and password= :password")
-
-    User getUser(String mail,String password);
+    User getUser(String mail, String password);
 
     @Insert
     void insert(User user);

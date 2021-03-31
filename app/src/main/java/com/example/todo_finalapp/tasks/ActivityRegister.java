@@ -1,7 +1,5 @@
-package com.example.todo_finalapp;
+package com.example.todo_finalapp.tasks;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,6 +13,9 @@ import android.widget.Toast;
 
 import com.example.todo_finalapp.Database.AppDatabase;
 import com.example.todo_finalapp.Database.TaskDao;
+import com.example.todo_finalapp.R;
+import com.example.todo_finalapp.Database.User;
+import com.example.todo_finalapp.Database.repoUser;
 
 
 public class ActivityRegister extends AppCompatActivity {
@@ -62,7 +63,7 @@ public class ActivityRegister extends AppCompatActivity {
                             User user = new User(name.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString());
                             repouser.insertUser(user);
                             progressDialog.dismiss();
-                            startActivity(new Intent(ActivityRegister.this,ActivityLogin.class));
+                            startActivity(new Intent(ActivityRegister.this, ActivityLogin.class));
                         }
                     },1000);
                 }

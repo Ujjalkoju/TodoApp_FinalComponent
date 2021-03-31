@@ -1,7 +1,5 @@
-package com.example.todo_finalapp;
+package com.example.todo_finalapp.Database;
 
-
-import com.example.todo_finalapp.Database.AppDatabase;
 
 public class repoUser {
 

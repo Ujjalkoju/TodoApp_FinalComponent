@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/footballregiscrop"
-    tools:context=".ActivityLogin">
+    tools:context=".tasks.ActivityLogin">
 
     <EditText
         android:id="@+id/user_email"

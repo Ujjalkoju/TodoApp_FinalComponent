@@ -1,4 +1,4 @@
-package com.example.todo_finalapp;
+package com.example.todo_finalapp.Database;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

@@ -7,9 +7,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.example.todo_finalapp.DaoUser;
-import com.example.todo_finalapp.User;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
