@@ -7,17 +7,20 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.example.todo_finalapp.DaoUser;
+import com.example.todo_finalapp.User;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {TaskEntry.class}, version = 1, exportSchema = false)
+@Database(entities = {TaskEntry.class, User.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();
     private static String DATABASE_NAME = "todolist";
-    static final ExecutorService databaseWriteExecutor =
+    public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(1);
 
     private static AppDatabase sInstance;
@@ -39,7 +42,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TaskDao taskDao();
 
-
+    public abstract DaoUser DaoUser();
 
 
 }

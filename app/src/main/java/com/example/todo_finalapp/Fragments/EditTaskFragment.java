@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class EditTaskFragment extends Fragment {
+    private int user_id;
     // Extra for the task ID to be received after rotation
     public static final String INSTANCE_TASK_ID = "instanceTaskId";
     public static final String EXTRA_TASK_ID = "ExtraTaskID";
@@ -59,7 +60,7 @@ public class EditTaskFragment extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_try_frag, container, false);
         rootView = inflater.inflate(R.layout.fragment_edit_task, container, false);
-
+        user_id=Integer.parseInt(getActivity().getIntent().getStringExtra("userId"));
         initViews();
 
         if (savedInstanceState != null && savedInstanceState.containsKey(INSTANCE_TASK_ID)) {
@@ -152,7 +153,7 @@ public class EditTaskFragment extends Fragment {
         int priority = getPriorityFromViews();
         Date date = new Date();
         del_Clicked=1;
-        TaskEntry todo = new TaskEntry(description,note, priority, date);
+        TaskEntry todo = new TaskEntry(description,note, priority, date, user_id);
         if(del_Clicked==1) {
             todo.setId(mTaskId);
             viewModel.deleteTask(todo);
@@ -188,7 +189,7 @@ public class EditTaskFragment extends Fragment {
         int priority = getPriorityFromViews();
         Date date = new Date();
 
-        TaskEntry todo = new TaskEntry(description, note, priority, date);
+        TaskEntry todo = new TaskEntry(description, note, priority, date, user_id);
         if(mTaskId == DEFAULT_TASK_ID) {
             viewModel.insertTask(todo);
             Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Player added", Toast.LENGTH_SHORT);

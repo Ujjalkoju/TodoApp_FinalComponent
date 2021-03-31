@@ -34,6 +34,7 @@ public class FragmentMain extends Fragment implements TaskAdapter.ItemClickListe
     // Member variables for the adapter and RecyclerView
     private RecyclerView mRecyclerView;
     private TaskAdapter mAdapter;
+    String user_id;
 
 
     MainActivityViewModel viewModel;
@@ -43,7 +44,7 @@ public class FragmentMain extends Fragment implements TaskAdapter.ItemClickListe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
+        user_id=getActivity().getIntent().getStringExtra("userId");
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         // Set the RecyclerView to its corresponding view
@@ -79,7 +80,7 @@ public class FragmentMain extends Fragment implements TaskAdapter.ItemClickListe
                 toast.show();
             }
         }).attachToRecyclerView(mRecyclerView);
-        viewModel.getTasks().observe(getActivity(), new Observer<List<TaskEntry>>() {
+        viewModel.getTasks(Integer.parseInt(user_id)).observe(getActivity(), new Observer<List<TaskEntry>>(){
             @Override
             public void onChanged(List<TaskEntry> taskEntries) {
                 mAdapter.setTasks(taskEntries);
@@ -94,7 +95,7 @@ public class FragmentMain extends Fragment implements TaskAdapter.ItemClickListe
         // Launch AddTaskActivity adding the itemId as an extra in the intent
         Intent intent = new Intent(getActivity(), AddEditTaskActivity.class);
         intent.putExtra(AddEditTaskActivity.EXTRA_TASK_ID, itemId);
-
+        intent.putExtra("userId",user_id);
         startActivity(intent);
     }
 }

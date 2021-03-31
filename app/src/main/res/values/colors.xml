@@ -14,7 +14,8 @@
     <color name="materialYellow">#F1C40F</color>
 
     <!-- colors for button -->
-    <color name="button">#673AB7</color>
-    <color name="button2">#D8491C</color>
     <color name="text">#E8E4D6</color>
+    <color name="login">#E4673AB7</color>
+    <color name="register">#E2D8491C</color>
+    <color name="button_text">#F6F6F6</color>
 </resources>

@@ -27,9 +27,9 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<TaskEntry>> getTasks(){
+    public LiveData<List<TaskEntry>> getTasks(int user_id){
 
-        return repository.getTasks();
+        return repository.getTasks(user_id);
 
     }
 
