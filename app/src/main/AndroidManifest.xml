@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/TodoAppTheme">
-        <activity android:name=".ActivitySplash">
+        <activity android:name=".tasks.ActivitySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,8 @@
         <activity android:name=".tasks.ActivityRegister" />
         <activity android:name=".tasks.ActivityLogin">
         </activity>
-        <activity android:name=".AddEditTask.AddEditTaskActivity" />
+        <activity android:name=".AddEditTask.AddEditTaskActivity"
+            android:label="Add Task" />
         <activity android:name=".tasks.MainActivity"></activity>
 
         <meta-data

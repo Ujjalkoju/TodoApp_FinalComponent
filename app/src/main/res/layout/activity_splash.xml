@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash"
-    tools:context=".ActivitySplash">
+    tools:context=".tasks.ActivitySplash">
 
     <TextView
         android:id="@+id/splash_text1"
@@ -18,7 +18,7 @@
         android:layout_marginRight="4dp"
         android:fontFamily="@font/akronim"
         android:text="You are Welcome."
-        android:textColor="#F3D7D3"
+        android:textColor="@color/cream"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

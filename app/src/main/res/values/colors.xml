@@ -18,4 +18,14 @@
     <color name="login">#E4673AB7</color>
     <color name="register">#E2D8491C</color>
     <color name="button_text">#F6F6F6</color>
+    <color name="grey">#F3EFEF</color>
+    <color name="bblla">#D5E8E4D6</color>
+    <color name="darkOrange">#B5E84916</color>
+    <color name="Dwhite">#D5E8E4D6</color>
+    <color name="BlackRed">#8BDC2036</color>
+    <color name="darkBlue">#C80C15C5</color>
+    <color name="skyblue">#A91CA4FF</color>
+    <color name="Darkyellow">#BCAC8E17</color>
+    <color name="lightCrimson">#C9C13333</color>
+    <color name="cream">#F3D7D3</color>
 </resources>

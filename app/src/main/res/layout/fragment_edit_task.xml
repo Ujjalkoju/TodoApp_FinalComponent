@@ -24,7 +24,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="#8BDC2036"
+            android:background="@color/BlackRed"
             android:gravity="start"
             android:hint="@string/Task_my"
             android:paddingBottom="@dimen/activity_horizontal_margin"
@@ -79,7 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#C9C13333"
+            android:background="@color/lightCrimson"
             android:checked="true"
             android:text="@string/high_priority"
             android:theme="@style/WhiteRadioButton" />
@@ -89,7 +89,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#BCAC8E17"
+            android:background="@color/Darkyellow"
             android:text="@string/med_priority"
             android:theme="@style/WhiteRadioButton" />
 
@@ -98,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#A91CA4FF"
+            android:background="@color/skyblue"
             android:text="@string/low_priority"
             android:theme="@style/WhiteRadioButton" />
 
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:background="#C80C15C5"
+        android:background="@color/darkBlue"
         android:text="@string/add_button"
         android:textColor="@android:color/primary_text_dark" />
 
