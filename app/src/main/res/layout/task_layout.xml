@@ -20,21 +20,21 @@
 
         <!-- TextView that displays the description -->
         <TextView
-            android:id="@+id/task_player"
+            android:id="@+id/your_taskid"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             android:textSize="22sp"
             android:textStyle="bold"
-            tools:text="@string/name" />
+            tools:text="@string/task" />
         <TextView
-            android:id="@+id/task_nation"
+            android:id="@+id/your_descid"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            tools:text="@string/nation" />
+            tools:text="@string/description" />
         <!-- TextView that displays the update date -->
         <TextView
             android:id="@+id/task_date"

@@ -72,7 +72,7 @@ public class EditTaskFragment extends Fragment {
         AddEditTaskViewModelFactory factory = new AddEditTaskViewModelFactory(getActivity().getApplication(), mTaskId);
         viewModel = ViewModelProviders.of(this, factory).get(AddEditTaskViewModel.class);
 
-        mEditText = rootView.findViewById(R.id.edit_player);
+        mEditText = rootView.findViewById(R.id.edit_task);
         ImageView speak = rootView.findViewById(R.id.edit_speak);
 
         speak.setOnClickListener(new View.OnClickListener() {
@@ -106,8 +106,8 @@ public class EditTaskFragment extends Fragment {
      * initViews is called from onCreate to init the member variable views
      */
     void initViews() {
-        mEditText = rootView.findViewById(R.id.edit_player);
-        AddNote = rootView.findViewById(R.id.edit_nation);
+        mEditText = rootView.findViewById(R.id.edit_task);
+        AddNote = rootView.findViewById(R.id.edit_desc);
         mRadioGroup = rootView.findViewById(R.id.radioGroup);
 
         mButton = rootView.findViewById(R.id.save_btn);

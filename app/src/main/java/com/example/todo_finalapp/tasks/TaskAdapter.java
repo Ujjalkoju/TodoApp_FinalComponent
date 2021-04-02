@@ -170,8 +170,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         public TaskViewHolder(View itemView) {
             super(itemView);
 
-            taskDescriptionView = itemView.findViewById(R.id.task_player);
-            noteView=itemView.findViewById(R.id.task_nation);
+            taskDescriptionView = itemView.findViewById(R.id.your_taskid);
+            noteView=itemView.findViewById(R.id.your_descid);
             updatedAtView = itemView.findViewById(R.id.task_date);
             priorityView = itemView.findViewById(R.id.priority_task);
             itemView.setOnClickListener(this);

@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.EditTaskFragment"
-    android:background="@drawable/messi"
+    android:background="@drawable/tenss1"
     android:orientation="vertical"
     android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingEnd="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".Fragments.EditTaskFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +20,13 @@
 
         <!-- EditText for getttaskEntrytask description input -->
         <EditText
-            android:id="@+id/edit_player"
+            android:id="@+id/edit_task"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="#8BDC2036"
             android:gravity="start"
-            android:hint="@string/football_player_s_name"
+            android:hint="@string/Task_my"
             android:paddingBottom="@dimen/activity_horizontal_margin"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
@@ -43,16 +43,17 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edit_nation"
+        android:id="@+id/edit_desc"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="#8BDC2036"
         android:gravity="start"
-        android:hint="@string/nationality_and_age"
+        android:hint="@string/my_description"
         android:paddingBottom="@dimen/activity_horizontal_margin"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white" />
+
     <TextView
         style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="wrap_content"
@@ -114,8 +115,6 @@
         android:background="#C80C15C5"
         android:text="@string/add_button"
         android:textColor="@android:color/primary_text_dark" />
-
-
 
 
 </LinearLayout>
