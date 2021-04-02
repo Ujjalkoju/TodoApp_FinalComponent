@@ -74,7 +74,7 @@ public class FragmentMain extends Fragment implements TaskAdapter.ItemClickListe
                 int position = viewHolder.getAdapterPosition();
                 List<TaskEntry> todoList = mAdapter.getTasks();
                 viewModel.deleteTask(todoList.get(position));
-                Toast toast=Toast.makeText(getActivity().getApplicationContext(),"Player Deleted",Toast.LENGTH_SHORT);
+                Toast toast=Toast.makeText(getActivity().getApplicationContext(),"Task Deleted",Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.BOTTOM, 0, 80);
                 toast.show();
             }

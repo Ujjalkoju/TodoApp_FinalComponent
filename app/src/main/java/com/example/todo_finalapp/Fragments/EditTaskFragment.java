@@ -94,7 +94,7 @@ public class EditTaskFragment extends Fragment {
         }
 
 
-        mEditText = rootView.findViewById(R.id.edit_player);
+        mEditText = rootView.findViewById(R.id.edit_task);
         ImageView speak = rootView.findViewById(R.id.edit_speak);
 
         speak.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +128,8 @@ public class EditTaskFragment extends Fragment {
      * initViews is called from onCreate to init the member variable views
      */
     void initViews() {
-        mEditText = rootView.findViewById(R.id.edit_player);
-        AddNote = rootView.findViewById(R.id.edit_nation);
+        mEditText = rootView.findViewById(R.id.edit_task);
+        AddNote = rootView.findViewById(R.id.edit_desc);
         mRadioGroup = rootView.findViewById(R.id.radioGroup);
         btnDelete=rootView.findViewById(R.id.deleteButton);
         mButton = rootView.findViewById(R.id.save_btn);
@@ -191,7 +191,7 @@ public class EditTaskFragment extends Fragment {
         TaskEntry todo = new TaskEntry(description, note, priority, date);
         if(mTaskId == DEFAULT_TASK_ID) {
             viewModel.insertTask(todo);
-            Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Player added", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Task added", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.BOTTOM, 0, 80);
             toast.show();
 
@@ -199,7 +199,7 @@ public class EditTaskFragment extends Fragment {
         else{
             todo.setId(mTaskId);
             viewModel.updateTask(todo);
-            Toast toast1=Toast.makeText(getActivity().getApplicationContext(),"Player updated",Toast.LENGTH_SHORT);
+            Toast toast1=Toast.makeText(getActivity().getApplicationContext(),"Task updated",Toast.LENGTH_SHORT);
             toast1.setGravity(Gravity.BOTTOM, 0, 80);
             toast1.show();
 

@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.delete_all:
                 viewModel.deleteAllNotes();
-                Toast.makeText(this, "Deleted all Players' info", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Deleted all Tasks", Toast.LENGTH_SHORT).show();
                 return true;
 
 

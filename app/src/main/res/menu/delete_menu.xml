@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/delete_all"
-        android:title="Delete all Players' Info"
+        android:title="Delete all your Tasks"
         app:showAsAction="never"/>
 
 </menu>
