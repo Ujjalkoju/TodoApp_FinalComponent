@@ -53,6 +53,29 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
     }
+    private boolean emptyValidation()
+    {
+        String Email = userEmail.getText().toString();
+        String Pass = userPassword.getText().toString();
+        if (Email.isEmpty() && Pass.isEmpty()) {
+            userEmail.setError("Please Enter your Email");
+            userPassword.setError("Please Enter your password");
+            return true;
+        }
+        else if (Email.isEmpty()) {
+            userEmail.setError("Please Enter your Email");
+            return true;
+        }else if (Pass.isEmpty()) {
+            userPassword.setError("Please Enter your password");
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
+
+    }
 
     private class AsyncLogin extends AsyncTask<Void,Void,Void> {
 
@@ -78,6 +101,12 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     public void login(View view) {
-        new AsyncLogin().execute();
+
+        if(!emptyValidation()) {
+
+            new AsyncLogin().execute();
+        }else{
+            Toast.makeText(getApplicationContext(), "Please fill the empty forms", Toast.LENGTH_SHORT).show();
+        }
     }
 }

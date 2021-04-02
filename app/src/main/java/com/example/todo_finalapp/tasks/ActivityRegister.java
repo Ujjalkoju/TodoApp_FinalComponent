@@ -68,7 +68,7 @@ public class ActivityRegister extends AppCompatActivity {
                     },1000);
                 }
                 else{
-                    Toast.makeText(ActivityRegister.this,"Empty Fields",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityRegister.this,"Please fill the Empty Fields",Toast.LENGTH_SHORT).show();
                 }
             }
         });

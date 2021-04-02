@@ -5,7 +5,7 @@
     android:id="@+id/register_act"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/footballregiscrop"
+    android:background="@drawable/loginreg"
     tools:context=".tasks.ActivityRegister">
 
     <EditText
@@ -107,7 +107,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="#B5E84916"
         android:text="Registration"
         android:textColor="@color/button_text"
 

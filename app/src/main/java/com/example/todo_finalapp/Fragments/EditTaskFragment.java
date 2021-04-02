@@ -95,7 +95,7 @@ public class EditTaskFragment extends Fragment {
         }
 
 
-        mEditText = rootView.findViewById(R.id.edit_player);
+        mEditText = rootView.findViewById(R.id.edit_task);
         ImageView speak = rootView.findViewById(R.id.edit_speak);
 
         speak.setOnClickListener(new View.OnClickListener() {
@@ -129,8 +129,8 @@ public class EditTaskFragment extends Fragment {
      * initViews is called from onCreate to init the member variable views
      */
     void initViews() {
-        mEditText = rootView.findViewById(R.id.edit_player);
-        AddNote = rootView.findViewById(R.id.edit_nation);
+        mEditText = rootView.findViewById(R.id.edit_task);
+        AddNote = rootView.findViewById(R.id.edit_desc);
         mRadioGroup = rootView.findViewById(R.id.radioGroup);
         btnDelete=rootView.findViewById(R.id.deleteButton);
         mButton = rootView.findViewById(R.id.save_btn);
@@ -184,29 +184,57 @@ public class EditTaskFragment extends Fragment {
      */
     public void onSaveButtonClicked() {
         // Not yet implemented
+        if(!emptyForms()){
+            String description = mEditText.getText().toString();
+            String note = AddNote.getText().toString();
+            int priority = getPriorityFromViews();
+            Date date = new Date();
+
+            TaskEntry todo = new TaskEntry(description, note, priority, date,user_id);
+
+
+            if(mTaskId == DEFAULT_TASK_ID) {
+                viewModel.insertTask(todo);
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Task Added", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 80);
+                toast.show();
+
+            }
+            else{
+                todo.setId(mTaskId);
+                viewModel.updateTask(todo);
+                Toast toast1=Toast.makeText(getActivity().getApplicationContext(),"Task Updated",Toast.LENGTH_SHORT);
+                toast1.setGravity(Gravity.BOTTOM, 0, 80);
+                toast1.show();
+
+            }
+            getActivity().finish();
+        }else{
+            Toast toast1=Toast.makeText(getActivity().getApplicationContext(),"Fill all fields in the forms ",Toast.LENGTH_SHORT);
+            toast1.show();
+        }
+
+    }
+
+    private boolean emptyForms() {
         String description = mEditText.getText().toString();
         String note = AddNote.getText().toString();
-        int priority = getPriorityFromViews();
-        Date date = new Date();
-
-        TaskEntry todo = new TaskEntry(description, note, priority, date, user_id);
-        if(mTaskId == DEFAULT_TASK_ID) {
-            viewModel.insertTask(todo);
-            Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Player added", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM, 0, 80);
-            toast.show();
-
+        if (description.isEmpty() && note.isEmpty()) {
+            mEditText.setError("Please Enter your Task");
+            AddNote.setError("Please Enter your Task Description");
+            return true;
         }
-        else{
-            todo.setId(mTaskId);
-            viewModel.updateTask(todo);
-            Toast toast1=Toast.makeText(getActivity().getApplicationContext(),"Player updated",Toast.LENGTH_SHORT);
-            toast1.setGravity(Gravity.BOTTOM, 0, 80);
-            toast1.show();
-
+        else if (description.isEmpty()) {
+            mEditText.setError("Please Enter your Task");
+            return true;
+        }else if (note.isEmpty()) {
+            AddNote.setError("Please Enter your Task Description");
+            return true;
         }
-        getActivity().finish();
-
+        else
+        {
+            return false;
+        }
     }
 
     /**
